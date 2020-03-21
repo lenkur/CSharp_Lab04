@@ -5,12 +5,15 @@ using System.Threading.Tasks;
 
 namespace KMA.CSharp2020.Lab03
 {
+    [Serializable]
     internal class Person
     {
         #region Fields
+        private Guid _guid;
         private string _name;
         private string _surname;
         private string _email;
+        private int _age;
         private DateTime _birthDate;
         private string _westernZodiac;
         private string _chineseZodiac;
@@ -27,21 +30,26 @@ namespace KMA.CSharp2020.Lab03
         #endregion
 
         #region Properties
-        private string Name
+        internal Guid Guid
+        {
+            get { return _guid; }
+            private set { _guid = value; }
+        }
+        internal string Name
         {
             get { return _name; }
-            set { _name = value; }
+            private set { _name = value; }
         }
 
-        private string Surname
+        internal string Surname
         {
             get { return _surname; }
-            set { _surname = value; }
+            private set { _surname = value; }
         }
-        private string Email
+        internal string Email
         {
             get { return _email; }
-            set
+            private set
             {
                 if (!Regex.IsMatch(value, "[\\w-+']+@[\\w\\.]+\\.\\w{2,3}"))
                     throw new ArgumentInvalidEmailException($"Email address '{value}' is invalid.");
@@ -49,10 +57,10 @@ namespace KMA.CSharp2020.Lab03
             }
         }
 
-        public DateTime BirthDate
+        internal DateTime BirthDate
         {
             get { return _birthDate; }
-            set
+            private set
             {
                 _birthDate = value;
                 if (_birthDate.Year < DateTime.Today.Year - 135)
@@ -63,26 +71,35 @@ namespace KMA.CSharp2020.Lab03
             }
         }
 
-        public int Age
+        internal int Age
         {
-            get
+            get { return _age; }
+            private set
             {
                 int res = DateTime.Now.Year - _birthDate.Year;
-                return DateTime.Now < _birthDate.AddYears(res) ? res - 1 : res;
+                _age = DateTime.Now < _birthDate.AddYears(res) ? res - 1 : res;
+
             }
         }
 
-        public bool IsAdult { get { return Age >= 18; } }
-        public bool IsBirthday { get { return BirthDate.Day == DateTime.Today.Day && BirthDate.Month == DateTime.Today.Month; } }
-        public string SunSign { get { return _westernZodiac; } }
-        public string ChineseSign { get { return _chineseZodiac; } }
-        private string WesternZodiac { set { _westernZodiac = value; } }
-        private string ChineseZodiac { set { _chineseZodiac = value; } }
+        internal bool IsAdult { get { return Age >= 18; } }
+        internal bool IsBirthday { get { return BirthDate.Day == DateTime.Today.Day && BirthDate.Month == DateTime.Today.Month; } }
+        internal string SunSign
+        {
+            get { return _westernZodiac; }
+            private set { _westernZodiac = value; }
+        }
+        internal string ChineseSign
+        {
+            get { return _chineseZodiac; }
+            private set { _chineseZodiac = value; }
+        }
         #endregion
 
         #region Constructors
         public Person(string name, string surname, DateTime birthDate)
         {
+            Guid = Guid.NewGuid();
             Name = name;
             Surname = surname;
             BirthDate = birthDate;
@@ -90,6 +107,7 @@ namespace KMA.CSharp2020.Lab03
 
         public Person(string name, string surname, string email)
         {
+            Guid = Guid.NewGuid();
             Name = name;
             Surname = surname;
             Email = email;
@@ -97,6 +115,7 @@ namespace KMA.CSharp2020.Lab03
 
         public Person(string name, string surname, string email, DateTime birthDate)
         {
+            Guid = Guid.NewGuid();
             Name = name;
             Surname = surname;
             Email = email;
@@ -117,44 +136,44 @@ namespace KMA.CSharp2020.Lab03
             switch (m)
             {
                 case 1:
-                    WesternZodiac = BirthDate.Day < 20 ? _westernZodiacSigns[11] : _westernZodiacSigns[m - 1];
+                    SunSign = BirthDate.Day < 20 ? _westernZodiacSigns[11] : _westernZodiacSigns[m - 1];
                     break;
                 case 2:
-                    WesternZodiac = BirthDate.Day < 19 ? _westernZodiacSigns[m - 2] : _westernZodiacSigns[m - 1];
+                    SunSign = BirthDate.Day < 19 ? _westernZodiacSigns[m - 2] : _westernZodiacSigns[m - 1];
                     break;
                 case 3:
-                    WesternZodiac = BirthDate.Day < 21 ? _westernZodiacSigns[m - 2] : _westernZodiacSigns[m - 1];
+                    SunSign = BirthDate.Day < 21 ? _westernZodiacSigns[m - 2] : _westernZodiacSigns[m - 1];
                     break;
                 case 4:
-                    WesternZodiac = BirthDate.Day < 20 ? _westernZodiacSigns[m - 2] : _westernZodiacSigns[m - 1];
+                    SunSign = BirthDate.Day < 20 ? _westernZodiacSigns[m - 2] : _westernZodiacSigns[m - 1];
                     break;
                 case 5:
-                    WesternZodiac = BirthDate.Day < 21 ? _westernZodiacSigns[m - 2] : _westernZodiacSigns[m - 1];
+                    SunSign = BirthDate.Day < 21 ? _westernZodiacSigns[m - 2] : _westernZodiacSigns[m - 1];
                     break;
                 case 6:
-                    WesternZodiac = BirthDate.Day < 21 ? _westernZodiacSigns[m - 2] : _westernZodiacSigns[m - 1];
+                    SunSign = BirthDate.Day < 21 ? _westernZodiacSigns[m - 2] : _westernZodiacSigns[m - 1];
                     break;
                 case 7:
-                    WesternZodiac = BirthDate.Day < 23 ? _westernZodiacSigns[m - 2] : _westernZodiacSigns[m - 1];
+                    SunSign = BirthDate.Day < 23 ? _westernZodiacSigns[m - 2] : _westernZodiacSigns[m - 1];
                     break;
                 case 8:
-                    WesternZodiac = BirthDate.Day < 23 ? _westernZodiacSigns[m - 2] : _westernZodiacSigns[m - 1];
+                    SunSign = BirthDate.Day < 23 ? _westernZodiacSigns[m - 2] : _westernZodiacSigns[m - 1];
                     break;
                 case 9:
-                    WesternZodiac = BirthDate.Day < 23 ? _westernZodiacSigns[m - 2] : _westernZodiacSigns[m - 1];
+                    SunSign = BirthDate.Day < 23 ? _westernZodiacSigns[m - 2] : _westernZodiacSigns[m - 1];
                     break;
                 case 10:
-                    WesternZodiac = BirthDate.Day < 23 ? _westernZodiacSigns[m - 2] : _westernZodiacSigns[m - 1];
+                    SunSign = BirthDate.Day < 23 ? _westernZodiacSigns[m - 2] : _westernZodiacSigns[m - 1];
                     break;
                 case 11:
-                    WesternZodiac = BirthDate.Day < 22 ? _westernZodiacSigns[m - 2] : _westernZodiacSigns[m - 1];
+                    SunSign = BirthDate.Day < 22 ? _westernZodiacSigns[m - 2] : _westernZodiacSigns[m - 1];
                     break;
                 case 12:
-                    WesternZodiac = BirthDate.Day < 22 ? _westernZodiacSigns[m - 2] : _westernZodiacSigns[m - 1];
+                    SunSign = BirthDate.Day < 22 ? _westernZodiacSigns[m - 2] : _westernZodiacSigns[m - 1];
                     break;
             }
         }
 
-        private void CalcChineseZodiac() { ChineseZodiac = _chineseZodiacSigns[_birthDate.Year % 12]; }
+        private void CalcChineseZodiac() { ChineseSign = _chineseZodiacSigns[_birthDate.Year % 12]; }
     }
 }

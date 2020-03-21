@@ -107,14 +107,14 @@ namespace KMA.CSharp2020.Lab03
         private Person User
         {
             get { return _person; }
-            //set { _person = new Person(_name, _surname, _email, _birthDate); }
+            set { _person = value; }
         }
         #endregion
 
         #region Commands
         public RelayCommand<Object> CalculateCommand
         {
-            get { return _calculateCommand ?? (_calculateCommand = new RelayCommand<object>(CommandInmplementation, o => CanExecuteCommandLogIn())); }
+            get { return _calculateCommand ?? (_calculateCommand = new RelayCommand<object>(CommandCalculateInmplementation, o => CanExecuteCommandLogIn())); }
         }
 
         public RelayCommand<Object> ShowAllCommand
@@ -134,7 +134,7 @@ namespace KMA.CSharp2020.Lab03
             NavigationManager.Instance.Navigate(ViewType.UserList);
         }
 
-        private async void CommandInmplementation(object obj)
+        private async void CommandCalculateInmplementation(object obj)
         {
             LoaderManager.Instance.ShowLoader();
             await Task.Run(() => Thread.Sleep(1000));
@@ -144,14 +144,12 @@ namespace KMA.CSharp2020.Lab03
         #endregion
 
         #region Methods
-       
         private void Calculate()
         {
             try
             {
-                _person = new Person(Name, Surname, Email, BirthDate);
-                WesternZodiac = User.SunSign;
-                ChineseZodiac = User.ChineseSign;
+                User = new Person(Name, Surname, Email, BirthDate);
+                StationManager.DataStorage.AddPerson(User);
                 ManageOutput();
                 if (User.IsBirthday) MessageBox.Show("Happy Birthday!", "Congratulations!", MessageBoxButton.OK, MessageBoxImage.Question);
             }
@@ -163,6 +161,8 @@ namespace KMA.CSharp2020.Lab03
 
         private void ManageOutput()
         {
+            WesternZodiac = User.SunSign;
+            ChineseZodiac = User.ChineseSign;
             GeneralInformation = "";
             EmailInformation = "";
             Name = "";

@@ -1,4 +1,5 @@
-﻿using KMA.CSharp2020.Lab03.Tools.Managers;
+﻿using KMA.CSharp2020.Lab03.Tools.DataStorage;
+using KMA.CSharp2020.Lab03.Tools.Managers;
 using KMA.CSharp2020.Lab03.Tools.Navigation;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,6 +21,7 @@ namespace KMA.CSharp2020.Lab03
         {
             InitializeComponent();
             DataContext = new MainWindowViewModel();
+            StationManager.Initialize(new SerializedDataStorage());
             NavigationManager.Instance.Initialize(new InitializationNavigationModel(this));
             NavigationManager.Instance.Navigate(ViewType.LogIn);
         }
