@@ -9,24 +9,23 @@
     <Grid>
         <Grid Background="LightSeaGreen">
             <Grid.RowDefinitions>
+                <RowDefinition Height="0.15*" />
+                <RowDefinition Height="0.25*" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="0.05*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button 
                 Grid.Row="1" Grid.Column="0" 
-                HorizontalAlignment="Center" VerticalAlignment="Stretch" 
-                Margin="5" Padding="20, 2" Content="Back" 
+                HorizontalAlignment="Center" VerticalAlignment="Center" 
+                Margin="5" Padding="20, 5" Content="Back" 
                 Command="{Binding BackToLogInCommand}"/>
             <DataGrid
                 Grid.Row="2" Grid.Column="0" Margin="15"
                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                ItemsSource="{Binding Users, Mode=OneWay}" AutoGenerateColumns="False"
-                RowBackground="LightCyan">
+                ItemsSource="{Binding Users, Mode=OneWay}" AutoGenerateColumns="False">
                 <DataGrid.Columns>
                     <DataGridTextColumn 
                         Header="Name" Width="Auto" Binding="{Binding Name}"></DataGridTextColumn>
