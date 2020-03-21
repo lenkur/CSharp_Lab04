@@ -20,6 +20,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="40" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="40" />
                 <RowDefinition Height="*" />
 
             </Grid.RowDefinitions>
@@ -98,6 +99,11 @@
                 Height="30" Margin="5" 
                 TextWrapping="Wrap" TextAlignment="Center"
                 Text="{Binding EmailInformation, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button 
+                Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="2"
+                HorizontalAlignment="Center" VerticalAlignment="Stretch" 
+                Margin="5" Padding="20, 2" Content="Show All" 
+                Command="{Binding ShowAllCommand}"/>
         </Grid>
     </Grid>
 </UserControl>

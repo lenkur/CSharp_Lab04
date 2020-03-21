@@ -1,4 +1,5 @@
 ﻿using KMA.CSharp2020.Lab03.Tools.Managers;
+using KMA.CSharp2020.Lab03.Tools.Navigation;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,8 +21,8 @@ namespace KMA.CSharp2020.Lab03
 
         #region Commands
         private RelayCommand<object> _calculateCommand;
+        private RelayCommand<object> _showAllCommand;
         #endregion
-
         #endregion
 
         #region Properties
@@ -113,7 +114,24 @@ namespace KMA.CSharp2020.Lab03
         #region Commands
         public RelayCommand<Object> CalculateCommand
         {
-            get { return _calculateCommand ?? (_calculateCommand = new RelayCommand<object>(CommandInmplementation, o => CanExecuteCommand())); }
+            get { return _calculateCommand ?? (_calculateCommand = new RelayCommand<object>(CommandInmplementation, o => CanExecuteCommandLogIn())); }
+        }
+
+        public RelayCommand<Object> ShowAllCommand
+        {
+            get { return _showAllCommand ?? (_showAllCommand = new RelayCommand<object>(ShowAllImplementation, o => true)); }
+        }
+
+        public bool CanExecuteCommandLogIn()
+        {
+            return !string.IsNullOrWhiteSpace(Name) &&
+                   !string.IsNullOrWhiteSpace(Surname) &&
+                   !string.IsNullOrWhiteSpace(Email);
+        }
+
+        private void ShowAllImplementation(object obj)
+        {
+            NavigationManager.Instance.Navigate(ViewType.UserList);
         }
 
         private async void CommandInmplementation(object obj)
@@ -123,26 +141,10 @@ namespace KMA.CSharp2020.Lab03
             Calculate();
             LoaderManager.Instance.HideLoader();
         }
-
-        private void ManageOutput()
-        {
-            GeneralInformation = "";
-            EmailInformation = "";
-            Name = "";
-            Surname = "";
-            Email = "";
-        }
-
         #endregion
 
         #region Methods
-        public bool CanExecuteCommand()
-        {
-            return !string.IsNullOrWhiteSpace(Name) &&
-                   !string.IsNullOrWhiteSpace(Surname) &&
-                   !string.IsNullOrWhiteSpace(Email);
-        }
-
+       
         private void Calculate()
         {
             try
@@ -157,6 +159,15 @@ namespace KMA.CSharp2020.Lab03
             {
                 MessageBox.Show(e.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void ManageOutput()
+        {
+            GeneralInformation = "";
+            EmailInformation = "";
+            Name = "";
+            Surname = "";
+            Email = "";
         }
         #endregion
     }
