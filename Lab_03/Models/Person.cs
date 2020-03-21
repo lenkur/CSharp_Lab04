@@ -35,18 +35,18 @@ namespace KMA.CSharp2020.Lab03
             get { return _guid; }
             private set { _guid = value; }
         }
-        internal string Name
+        public string Name
         {
             get { return _name; }
             private set { _name = value; }
         }
 
-        internal string Surname
+        public string Surname
         {
             get { return _surname; }
             private set { _surname = value; }
         }
-        internal string Email
+        public string Email
         {
             get { return _email; }
             private set
@@ -57,7 +57,7 @@ namespace KMA.CSharp2020.Lab03
             }
         }
 
-        internal DateTime BirthDate
+        public DateTime BirthDate
         {
             get { return _birthDate; }
             private set
@@ -71,7 +71,7 @@ namespace KMA.CSharp2020.Lab03
             }
         }
 
-        internal int Age
+        public int Age
         {
             get { return _age; }
             private set
@@ -82,14 +82,14 @@ namespace KMA.CSharp2020.Lab03
             }
         }
 
-        internal bool IsAdult { get { return Age >= 18; } }
+        public bool IsAdult { get { return Age >= 18; } }
         internal bool IsBirthday { get { return BirthDate.Day == DateTime.Today.Day && BirthDate.Month == DateTime.Today.Month; } }
-        internal string SunSign
+        public string SunSign
         {
             get { return _westernZodiac; }
             private set { _westernZodiac = value; }
         }
-        internal string ChineseSign
+        public string ChineseSign
         {
             get { return _chineseZodiac; }
             private set { _chineseZodiac = value; }
@@ -126,6 +126,7 @@ namespace KMA.CSharp2020.Lab03
 
         private async void FillProperties()
         {
+            Age = 0;
             CalcWesternZodiac();
             await Task.Run(() => CalcChineseZodiac());
         }

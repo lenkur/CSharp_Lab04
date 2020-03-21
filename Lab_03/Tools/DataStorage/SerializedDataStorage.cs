@@ -1,8 +1,6 @@
 ﻿using KMA.CSharp2020.Lab03.Tools.Managers;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Windows;
 
 namespace KMA.CSharp2020.Lab03.Tools.DataStorage
 {
@@ -10,12 +8,13 @@ namespace KMA.CSharp2020.Lab03.Tools.DataStorage
     {
         private readonly List<Person> _users;
 
+        public List<Person> UsersList { get { return _users; } }
+
         internal SerializedDataStorage()
         {
             try
             {
                 _users = SerializationManager.Deserialize<List<Person>>(FileFolderHelper.StorageFilePath);
-                _users.ForEach(i => MessageBox.Show(i.Name));
             }
             catch (FileNotFoundException)
             {

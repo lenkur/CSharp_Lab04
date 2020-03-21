@@ -22,6 +22,31 @@
                 HorizontalAlignment="Center" VerticalAlignment="Stretch" 
                 Margin="5" Padding="20, 2" Content="Back" 
                 Command="{Binding BackToLogInCommand}"/>
+            <DataGrid
+                Grid.Row="2" Grid.Column="0" Margin="15"
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                ItemsSource="{Binding Users, Mode=OneWay}" AutoGenerateColumns="False"
+                RowBackground="LightCyan">
+                <DataGrid.Columns>
+                    <DataGridTextColumn 
+                        Header="Name" Width="Auto" Binding="{Binding Name}"></DataGridTextColumn>
+                    <DataGridTextColumn 
+                        Header="Surname" Width="Auto" Binding="{Binding Surname}"></DataGridTextColumn>
+                    <DataGridTextColumn 
+                        Header="Birth date" Width="Auto" 
+                        Binding="{Binding BirthDate, StringFormat=\{0:dd MMM yy \}}"></DataGridTextColumn>
+                    <DataGridTextColumn 
+                        Header="Age" Width="Auto" Binding="{Binding Age}"></DataGridTextColumn>
+                    <DataGridCheckBoxColumn 
+                        Header="Adult" Width="Auto" Binding="{Binding IsAdult, Mode=OneWay}"></DataGridCheckBoxColumn>
+                    <DataGridTextColumn 
+                        Header="Sun Sign" Width="Auto" Binding="{Binding SunSign}"></DataGridTextColumn>
+                    <DataGridTextColumn 
+                        Header="Chinese Sign" Width="Auto" Binding="{Binding ChineseSign}"></DataGridTextColumn>
+                    <DataGridTextColumn 
+                        Header="E-mail" Width="*" Binding="{Binding Email}"></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
     </Grid>
 </UserControl>
