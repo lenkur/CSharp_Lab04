@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows;
 
 namespace KMA.CSharp2020.Lab03.Tools.DataStorage
 {
@@ -79,7 +80,7 @@ namespace KMA.CSharp2020.Lab03.Tools.DataStorage
             SaveChanges();
         }
 
-        private void SaveChanges()
+        internal void SaveChanges()
         {
             SerializationManager.Serialize(_users, FileFolderHelper.StorageFilePath);
         }
@@ -94,6 +95,11 @@ namespace KMA.CSharp2020.Lab03.Tools.DataStorage
             _users.Add(person);
             SaveChanges();
         }
+        public void DeletePerson(Person person)
+        {
+            MessageBox.Show(person.Guid.ToString());
+            _users.Remove(person);
+            SaveChanges();
+        }
     }
 }
-

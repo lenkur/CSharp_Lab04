@@ -38,18 +38,18 @@ namespace KMA.CSharp2020.Lab03
         public string Name
         {
             get { return _name; }
-            private set { _name = value; }
+            set { _name = value; }
         }
 
         public string Surname
         {
             get { return _surname; }
-            private set { _surname = value; }
+            set { _surname = value; }
         }
         public string Email
         {
             get { return _email; }
-            private set
+            set
             {
                 if (!Regex.IsMatch(value, "[\\w-+']+@[\\w\\.]+\\.\\w{2,3}"))
                     throw new ArgumentInvalidEmailException($"Email address '{value}' is invalid.");
@@ -60,14 +60,17 @@ namespace KMA.CSharp2020.Lab03
         public DateTime BirthDate
         {
             get { return _birthDate; }
-            private set
+            set
             {
-                _birthDate = value;
                 if (_birthDate.Year < DateTime.Today.Year - 135)
                     throw new ArgumentExpiredDateException($"{BirthDate.Date:D} is too old date.");
                 if (_birthDate > DateTime.Today)
                     throw new ArgumentNonExistingDateException($"{BirthDate.Date:D} does not exist yet.");
-                else FillProperties();
+                else
+                {
+                    _birthDate = value;
+                    FillProperties();
+                }
             }
         }
 
@@ -78,7 +81,6 @@ namespace KMA.CSharp2020.Lab03
             {
                 int res = DateTime.Now.Year - _birthDate.Year;
                 _age = DateTime.Now < _birthDate.AddYears(res) ? res - 1 : res;
-
             }
         }
 

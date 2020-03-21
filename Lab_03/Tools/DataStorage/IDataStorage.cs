@@ -6,6 +6,7 @@ namespace KMA.CSharp2020.Lab03.Tools.DataStorage
     {
         bool PersonExists(string name, string surname, string email);
         void AddPerson(Person person);
+        void DeletePerson(Person person);
         List<Person> UsersList { get; }
     }
 }

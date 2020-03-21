@@ -12,7 +12,7 @@
                 <RowDefinition Height="0.15*" />
                 <RowDefinition Height="0.25*" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="0.05*" />
+                <RowDefinition Height="0.15*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -25,7 +25,8 @@
             <DataGrid
                 Grid.Row="2" Grid.Column="0" Margin="15"
                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-                ItemsSource="{Binding Users, Mode=OneWay}" AutoGenerateColumns="False">
+                AutoGenerateColumns="False" SelectionMode="Single"
+                ItemsSource="{Binding Users, Mode=OneWay}" SelectedItem="{Binding SelectedPerson, Mode=TwoWay}">
                 <DataGrid.Columns>
                     <DataGridTextColumn 
                         Header="Name" Width="Auto" Binding="{Binding Name}"></DataGridTextColumn>
@@ -35,17 +36,24 @@
                         Header="Birth date" Width="Auto" 
                         Binding="{Binding BirthDate, StringFormat=\{0:dd MMM yy \}}"></DataGridTextColumn>
                     <DataGridTextColumn 
-                        Header="Age" Width="Auto" Binding="{Binding Age}"></DataGridTextColumn>
+                        Header="Age" Width="Auto" Binding="{Binding Age, Mode=OneWay}"></DataGridTextColumn>
                     <DataGridCheckBoxColumn 
                         Header="Adult" Width="Auto" Binding="{Binding IsAdult, Mode=OneWay}"></DataGridCheckBoxColumn>
                     <DataGridTextColumn 
-                        Header="Sun Sign" Width="Auto" Binding="{Binding SunSign}"></DataGridTextColumn>
+                        Header="Sun Sign" Width="Auto" Binding="{Binding SunSign, Mode=OneWay}">
+                    </DataGridTextColumn>
                     <DataGridTextColumn 
-                        Header="Chinese Sign" Width="Auto" Binding="{Binding ChineseSign}"></DataGridTextColumn>
+                        Header="Chinese Sign" Width="Auto" Binding="{Binding ChineseSign, Mode=OneWay}">
+                    </DataGridTextColumn>
                     <DataGridTextColumn 
                         Header="E-mail" Width="*" Binding="{Binding Email}"></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
+            <Button 
+                Grid.Row="3" Grid.Column="0" 
+                HorizontalAlignment="Center" VerticalAlignment="Center" 
+                Margin="5" Padding="20, 5" Content="Delete User" 
+                Command="{Binding DeletePersonCommand}"/>
         </Grid>
     </Grid>
 </UserControl>
