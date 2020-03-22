@@ -97,7 +97,6 @@ namespace KMA.CSharp2020.Lab03.Tools.DataStorage
         }
         public void DeletePerson(Person person)
         {
-            MessageBox.Show(person.Guid.ToString());
             _users.Remove(person);
             SaveChanges();
         }

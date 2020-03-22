@@ -62,10 +62,10 @@ namespace KMA.CSharp2020.Lab03
             get { return _birthDate; }
             set
             {
-                if (_birthDate.Year < DateTime.Today.Year - 135)
-                    throw new ArgumentExpiredDateException($"{BirthDate.Date:D} is too old date.");
-                if (_birthDate > DateTime.Today)
-                    throw new ArgumentNonExistingDateException($"{BirthDate.Date:D} does not exist yet.");
+                if (value.Year < DateTime.Today.Year - 135)
+                    throw new ArgumentExpiredDateException($"{value.Date:D} is too old date.");
+                if (value > DateTime.Today)
+                    throw new ArgumentNonExistingDateException($"{value.Date:D} does not exist yet.");
                 else
                 {
                     _birthDate = value;

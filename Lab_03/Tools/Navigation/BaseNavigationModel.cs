@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Windows;
 
 namespace KMA.CSharp2020.Lab03.Tools.Navigation
 {
@@ -24,9 +25,12 @@ namespace KMA.CSharp2020.Lab03.Tools.Navigation
         {
             if (!ViewsDictionary.ContainsKey(viewType))
                 InitializeView(viewType);
+            if (ViewsDictionary[viewType] is KMA.CSharp2020.Lab03.Tools.Navigation.IUpdateable)
+            {
+                ((IUpdateable)ViewsDictionary[viewType]).Update();
+            }
             ContentOwner.ContentControl.Content = ViewsDictionary[viewType];
         }
-
         protected abstract void InitializeView(ViewType viewType);
     }
 }

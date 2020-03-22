@@ -1,6 +1,7 @@
 ﻿using KMA.CSharp2020.Lab03.Tools.Managers;
 using KMA.CSharp2020.Lab03.Tools.Navigation;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 
@@ -45,6 +46,11 @@ namespace KMA.CSharp2020.Lab03.ViewModels
         }
 
         #region Commands
+        public void Update()
+        {
+            Users = new ObservableCollection<Person>(StationManager.DataStorage.UsersList);
+        }
+
         public RelayCommand<Object> BackToLogInCommand
         {
             get { return _backToLogInCommand ?? (_backToLogInCommand = new RelayCommand<object>(BackToLogInCommandImplementation, o => true)); }
@@ -56,12 +62,11 @@ namespace KMA.CSharp2020.Lab03.ViewModels
 
         private void DeletePersonCommandImplementation(object obj)
         {
-            MessageBox.Show(SelectedPerson.Guid.ToString());
             if (SelectedPerson == null) return;
             if (MessageBox.Show("Delete Person?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Exclamation) == MessageBoxResult.Yes)
             {
                 StationManager.DataStorage.DeletePerson(SelectedPerson);
-                Users.Remove(SelectedPerson);
+                Update();
             }
         }
 
