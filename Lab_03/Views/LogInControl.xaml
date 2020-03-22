@@ -18,7 +18,7 @@
                 <RowDefinition Height="40" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="40" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="40" />
                 <RowDefinition Height="*" />
@@ -86,12 +86,12 @@
             <TextBlock 
                 Grid.Row="10" Grid.Column="0"  
                 HorizontalAlignment="Center" VerticalAlignment="Center"
-                Height="30" Margin="5" TextWrapping="Wrap" 
+                Margin="5" TextWrapping="Wrap" 
                 Text="{Binding ChineseZodiac, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock 
                 Grid.Row="10" Grid.Column="1"  
                 HorizontalAlignment="Center" VerticalAlignment="Center"
-                Height="30" Margin="5" TextWrapping="Wrap" 
+                Margin="5" TextWrapping="Wrap" 
                 Text="{Binding WesternZodiac, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock 
                 Grid.Row="11" Grid.Column="0"  Grid.ColumnSpan="2"
